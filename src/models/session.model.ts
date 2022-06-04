@@ -1,7 +1,4 @@
 import { Document, Schema, model } from "mongoose";
-import bcrypt from "bcrypt";
-import config from "config";
-import { boolean } from "zod";
 import { UserDocument } from "./user.model";
 
 export interface SessionDocument extends Document {
