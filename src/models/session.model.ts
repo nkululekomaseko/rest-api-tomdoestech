@@ -4,7 +4,7 @@ import config from "config";
 import { boolean } from "zod";
 import { UserDocument } from "./user.model";
 
-export interface SchemaDocument extends Document {
+export interface SessionDocument extends Document {
   user: UserDocument["_id"];
   valid: boolean;
   userAgent: string;
@@ -21,6 +21,6 @@ const sessionSchema = new Schema(
   { timestamps: true }
 );
 
-const SessionModel = model("Session", sessionSchema);
+const SessionModel = model<SessionDocument>("Session", sessionSchema);
 
 export default SessionModel;

@@ -14,6 +14,7 @@ const signJwt = (object: Object, options?: jwt.SignOptions) => {
 const verifyJwt = (token: string) => {
   try {
     const decoded = jwt.verify(token, publicKey);
+
     return {
       valid: true,
       expired: false,

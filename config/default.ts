@@ -2,7 +2,7 @@ export default {
   port: 1337,
   dbUri: "mongodb://192.168.1.36:27017/rest-api-tomdoestech",
   saltWorkFactor: 10,
-  accessTokenTtl: "15m",
+  accessTokenTtl: "10s",
   refreshTokenTtl: "1y",
   publicKey: `-----BEGIN PUBLIC KEY-----
 MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxT8S8wO3LQzxSXYuqOke
