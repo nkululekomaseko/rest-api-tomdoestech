@@ -4,7 +4,7 @@ import { CreateUserInput } from "../schema/user.schema";
 import { createUser } from "../service/user.service";
 import logger from "../utils/logger";
 
-const createUserHandler = async (
+export const createUserHandler = async (
   request: Request<{}, {}, CreateUserInput["body"]>,
   response: Response
 ) => {
@@ -16,5 +16,3 @@ const createUserHandler = async (
     return response.status(409).send(error.message);
   }
 };
-
-export { createUserHandler };

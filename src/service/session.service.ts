@@ -6,24 +6,24 @@ import { get } from "lodash";
 import { findUser } from "./user.service";
 import { decode } from "punycode";
 
-const createSession = async (userId: string, userAgent: string) => {
+export const createSession = async (userId: string, userAgent: string) => {
   const session = await SessionModel.create({ user: userId, userAgent });
 
   return session.toJSON();
 };
 
-const findSessions = async (query: FilterQuery<SessionDocument>) => {
+export const findSessions = async (query: FilterQuery<SessionDocument>) => {
   return SessionModel.find(query).lean();
 };
 
-const updateSession = async (
+export const updateSession = async (
   query: FilterQuery<SessionDocument>,
   update: UpdateQuery<SessionDocument>
 ) => {
   return SessionModel.updateOne(query, update);
 };
 
-const reIssueAccessToken = async ({
+export const reIssueAccessToken = async ({
   refreshToken,
 }: {
   refreshToken: string;
@@ -48,5 +48,3 @@ const reIssueAccessToken = async ({
 
   return accessToken;
 };
-
-export { createSession, findSessions, updateSession, reIssueAccessToken };

@@ -2,7 +2,7 @@ import { DocumentDefinition, FilterQuery } from "mongoose";
 import { omit } from "lodash";
 import UserModel, { UserDocument } from "../models/user.model";
 
-const createUser = async (
+export const createUser = async (
   input: DocumentDefinition<
     Omit<UserDocument, "createdAt" | "updatedAt" | "comparePassword">
   >
@@ -15,7 +15,7 @@ const createUser = async (
   }
 };
 
-const validatePassword = async ({
+export const validatePassword = async ({
   email,
   password,
 }: {
@@ -33,8 +33,6 @@ const validatePassword = async ({
   return isValid ? omit(user.toJSON(), "password") : isValid;
 };
 
-const findUser = async (query: FilterQuery<UserDocument>) => {
+export const findUser = async (query: FilterQuery<UserDocument>) => {
   return UserModel.findOne(query).lean();
 };
-
-export { createUser, validatePassword, findUser };

@@ -8,7 +8,7 @@ import {
 import { validatePassword } from "../service/user.service";
 import { signJwt } from "../utils/jwt.utils";
 
-const createUserSessionHandler = async (
+export const createUserSessionHandler = async (
   request: Request,
   response: Response
 ) => {
@@ -41,7 +41,10 @@ const createUserSessionHandler = async (
   return response.send({ accessToken, refreshToken });
 };
 
-const getUserSessionsHandler = async (request: Request, response: Response) => {
+export const getUserSessionsHandler = async (
+  request: Request,
+  response: Response
+) => {
   const userId = response.locals.user._id;
 
   const sessions = await findSessions({ user: userId, valid: true });
@@ -49,7 +52,10 @@ const getUserSessionsHandler = async (request: Request, response: Response) => {
   return response.send(sessions);
 };
 
-const deleteSessionHandler = async (request: Request, response: Response) => {
+export const deleteSessionHandler = async (
+  request: Request,
+  response: Response
+) => {
   const sessionId = response.locals.user.session;
 
   await updateSession({ _id: sessionId }, { valid: false });
@@ -58,10 +64,4 @@ const deleteSessionHandler = async (request: Request, response: Response) => {
     accessToken: null,
     refreshToken: null,
   });
-};
-
-export {
-  createUserSessionHandler,
-  getUserSessionsHandler,
-  deleteSessionHandler,
 };
