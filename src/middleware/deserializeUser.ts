@@ -9,12 +9,12 @@ const deserializeUser = async (
   response: Response,
   next: NextFunction
 ) => {
-  const accessToken =
-    get(request, "cookies.accessToken") ||
-    get(request, "headers.authorization", "").replace(/^Bearer\s/, "");
+  const accessToken = get(request, "headers.authorization", "").replace(
+    /^Bearer\s/,
+    ""
+  );
 
-  const refreshToken =
-    get(request, "cookies.refreshToken") || get(request, "headers.x-refresh");
+  const refreshToken = get(request, "headers.x-refresh");
 
   if (!accessToken) {
     return next();
@@ -32,15 +32,6 @@ const deserializeUser = async (
 
     if (!!newAccessToken) {
       response.setHeader("x-access-token", newAccessToken);
-
-      response.cookie("accessToken", newAccessToken, {
-        maxAge: 900000, //15min
-        httpOnly: true,
-        domain: "localhost",
-        path: "/",
-        sameSite: "strict",
-        secure: false,
-      });
     } else {
       return next();
     }

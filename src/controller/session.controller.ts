@@ -38,24 +38,6 @@ export const createUserSessionHandler = async (
   );
 
   // return access & refresh tokens
-  response.cookie("accessToken", accessToken, {
-    maxAge: 900000, //15min
-    httpOnly: true,
-    domain: "localhost",
-    path: "/",
-    sameSite: "strict",
-    secure: false,
-  });
-
-  response.cookie("refreshToken", refreshToken, {
-    maxAge: 3.154e10, //1y
-    httpOnly: true,
-    domain: "localhost",
-    path: "/",
-    sameSite: "strict",
-    secure: false,
-  });
-
   return response.send({ accessToken, refreshToken });
 };
 
