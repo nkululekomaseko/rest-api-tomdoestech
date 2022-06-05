@@ -10,9 +10,13 @@ export const createUserHandler = async (
 ) => {
   try {
     const user = await createUser(request.body);
-    return response.send(omit(user.toJSON(), "password"));
+    return response.send(user);
   } catch (error: any) {
     logger.error(error);
     return response.status(409).send(error.message);
   }
+};
+
+export const getCurrentUser = async (request: Request, response: Response) => {
+  return response.send(response.locals.user);
 };
