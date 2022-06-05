@@ -5,6 +5,7 @@ import logger from "./utils/logger";
 import routes from "./routes/routes";
 import deserializeUser from "./middleware/deserializeUser";
 import cors from "cors";
+import cookieParser from "cookie-parser";
 
 const port = config.get<number>("port");
 
@@ -15,6 +16,7 @@ app.use(
     credentials: true,
   })
 );
+app.use(cookieParser());
 app.use(express.json());
 app.use(deserializeUser);
 
